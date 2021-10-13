@@ -4214,6 +4214,7 @@ void MVKDevice::enableFeatures(const VkBool32* pEnable, const VkBool32* pRequest
 	for (uint32_t i = 0; i < count; i++) {
 		((VkBool32*)pEnable)[i] = pRequested[i] && pAvailable[i];
 		if (pRequested[i] && !pAvailable[i]) {
+			setConfigurationResult(reportError(VK_ERROR_FEATURE_NOT_PRESENT, "123456789"));
 			setConfigurationResult(reportError(VK_ERROR_FEATURE_NOT_PRESENT, "vkCreateDevice(): Requested feature is not available on this device."));
 		}
 	}
